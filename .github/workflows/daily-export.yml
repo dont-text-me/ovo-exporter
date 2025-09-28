@@ -1,0 +1,26 @@
+name: daily-export.yml
+on:
+  workflow_dispatch:
+  schedule:
+    - cron "0 1 * * *"
+
+jobs:
+  do-export:
+    name: "Export electricity readings for the past three days"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout repo"
+        uses: actions/checkout@v5
+      - name: "Install uv"
+        uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.8.22"
+      - name: "Run script"
+        env:
+          OVO_USERNAME: ${{ secrets.OVO_USERNAME }}
+          OVO_PASSWORD: ${{ secrets.OVO_PASSWORD }}
+          DATABASE_URL: ${{ secrets.DB_URL }}
+          ACCOUNT_NUMBER: ${{ secrets.ACCOUNT_NUMBER }}
+        run: uv run main.py
+
+
