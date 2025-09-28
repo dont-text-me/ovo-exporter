@@ -1,0 +1,15 @@
+[project]
+name = "ovo-exporter"
+version = "0.1.0"
+description = """
+A quick and simple script to log into an OVO energy account
+and upload the half-hourly electricity usage stats
+into a POSTGRES database
+"""
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "httpx>=0.28.1",
+    "psycopg>=3.2.10",
+    "psycopg-binary>=3.2.10",
+]
